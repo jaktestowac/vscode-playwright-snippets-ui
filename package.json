@@ -1,0 +1,83 @@
+{
+  "name": "vsc-playwright-snippets-ui",
+  "displayName": "Playwright Snippets UI for VS Code",
+  "description": "UI for Playwright Snippets VS Code",
+  "author": "jaktestowac.pl",
+  "publisher": "jaktestowac-pl",
+  "version": "0.0.1",
+  "icon": "media/playwright-snippets-ui-logo.png",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jaktestowac/vscode-playwright-snippets-ui.git"
+  },
+  "galleryBanner": {
+    "color": "#2b3137",
+    "theme": "dark"
+  },
+  "keywords": [
+    "Playwright",
+    "node.js",
+    "testing",
+    "automation"
+  ],
+  "categories": [
+    "Testing"
+  ],
+  "extensionDependencies": [
+    "jaktestowac-pl.vsc-playwright-snippets"
+  ],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onView:playwright-snippets-ui"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "playwright-snippets-ui",
+          "title": "Playwright Snippets",
+          "icon": "./media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "playwright-snippets-ui": [
+        {
+          "type": "webview",
+          "id": "playwright-snippets-ui.snippets",
+          "name": "Snippets"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "playwright-snippets-ui.insertSnippet",
+        "title": "Insert Snippet"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test",
+    "publish:patch": "vsce publish patch",
+    "publish:minor": "vsce publish minor",
+    "publish:major": "vsce publish major"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.60.0",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^7.14.1",
+    "@typescript-eslint/parser": "^7.11.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.4.0"
+  }
+}

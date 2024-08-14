@@ -1,0 +1,55 @@
+body {
+  background-color: transparent;
+}
+
+#icons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+#icons .icon {
+  width: 140px;
+  padding: 20px;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+#icons .icon .codicon {
+  font-size: 32px;
+  padding-bottom: 16px;
+}
+
+svg {
+  /* transform: scale(0.3); */
+  fill: var(--vscode-editor-foreground);
+  margin: -18px;
+  width: 56px;
+  pointer-events: none;
+  margin-left: -20px;
+  margin-right: -20px;
+  margin-top: -20px;
+  margin-bottom: -10px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.list > div {
+  height: 22px;
+  line-height: 22px;
+  padding-right: 2px;
+  padding-left: 8px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  white-space: nowrap;
+  flex: 0;
+  cursor: pointer;
+}

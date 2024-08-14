@@ -1,0 +1,210 @@
+:root {
+  --container-paddding: 20px;
+  --input-padding-vertical: 6px;
+  --input-padding-horizontal: 4px;
+  --input-margin-vertical: 4px;
+  --input-margin-horizontal: 0;
+}
+
+body {
+  padding: 0 var(--container-paddding);
+  color: var(--vscode-foreground);
+  font-size: var(--vscode-font-size);
+  font-weight: var(--vscode-font-weight);
+  font-family: var(--vscode-font-family);
+  background-color: var(--vscode-editor-background);
+}
+
+ol,
+ul {
+  padding-left: var(--container-paddding);
+}
+
+body > *,
+form > * {
+  margin-block-start: var(--input-margin-vertical);
+  margin-block-end: var(--input-margin-vertical);
+}
+
+*:focus {
+  outline-color: var(--vscode-focusBorder) !important;
+}
+
+a {
+  color: var(--vscode-textLink-foreground);
+}
+
+a:hover,
+a:active {
+  color: var(--vscode-textLink-activeForeground);
+}
+
+code {
+  font-size: var(--vscode-editor-font-size);
+  font-family: var(--vscode-editor-font-family);
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  cursor: inherit;
+  flex: auto;
+  margin-left: -14px;
+}
+
+.label.loading {
+  pointer-events: none;
+  cursor: not-allowed !important;
+  opacity: 0.5;
+}
+
+button {
+  border: none;
+  padding: var(--input-padding-vertical) var(--input-padding-horizontal);
+  width: 100%;
+  text-align: center;
+  outline: 1px solid transparent;
+  outline-offset: 2px !important;
+  color: var(--vscode-button-foreground);
+  background: var(--vscode-button-background);
+}
+
+button.loading {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+button:hover {
+  cursor: pointer;
+  background: var(--vscode-button-hoverBackground);
+}
+
+button.loading:hover {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+button:focus {
+  outline-color: var(--vscode-focusBorder);
+}
+
+button.secondary {
+  color: var(--vscode-button-secondaryForeground);
+  background: var(--vscode-button-secondaryBackground);
+}
+
+button.secondary:hover {
+  background: var(--vscode-button-secondaryHoverBackground);
+}
+
+input:not([type="checkbox"]),
+textarea {
+  display: block;
+  width: 100%;
+  border: none;
+  font-family: var(--vscode-font-family);
+  padding: var(--input-padding-vertical) var(--input-padding-horizontal);
+  color: var(--vscode-input-foreground);
+  outline-color: var(--vscode-input-border);
+  background-color: var(--vscode-input-background);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--vscode-input-placeholderForeground);
+}
+
+a.nav-list__link {
+  text-decoration: none;
+  color: var(--color-foreground);
+}
+
+.nav-list__item {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 0.2rem;
+  padding: 0.2rem 0rem;
+  cursor: pointer;
+}
+
+.nav-list__item:hover {
+  background-color: var(--vscode-list-hoverBackground);
+  color: var(--vscode-list-hoverForeground);
+}
+
+.nav-list__link.loading {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.nav-list__link {
+  align-items: center;
+  color: inherit;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  gap: 0rem;
+  user-select: none;
+}
+
+.nav-list__icon {
+  flex: none;
+  opacity: 0.5;
+}
+
+.nav-list__label {
+  user-select: none;
+  flex: 1;
+  font-weight: 400;
+}
+
+.nav-list__title {
+  user-select: none;
+  padding: 0 2rem;
+  font-size: 0.7rem !important;
+  font-weight: 500;
+  margin: 0;
+  text-transform: uppercase;
+
+  display: block;
+  font-size: 1.5em;
+  margin-block-start: 1.5em;
+  margin-block-end: 0.5em;
+  margin-inline-start: -32px;
+  margin-inline-end: 0px;
+
+  color: var(--color-foreground);
+  opacity: 0.75;
+}
+
+.has-tooltip {
+  position: relative;
+}
+
+.has-tooltip:before {
+  content: attr(tooltip-text);
+  min-width: 54px;
+  background-color: var(--vscode-editor-background);
+  border: 1px solid !important;
+  border-color: var(--vscode-editorWidget-border) !important;
+  color: var(--color-foreground);
+  font-size: 12px;
+  border-radius: 2px;
+  padding: 6px 8px;
+  position: absolute;
+  z-index: 1000;
+  top: 32px;
+  left: 10%;
+  margin-left: -27px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.has-tooltip:hover:before,
+.has-tooltip:hover:after {
+  visibility: visible;
+  opacity: 1;
+}

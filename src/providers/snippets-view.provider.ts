@@ -100,6 +100,10 @@ export class SnippetsViewProvider implements vscode.WebviewViewProvider {
          Please add some scripts and hit refresh button.`;
     }
 
+    const searchInputHtml = `
+      <input type="text" id="searchInput" class="search" placeholder="Search snippets..." />
+    `;
+
     const nonce = getNonce();
 
     return `<!DOCTYPE html>
@@ -116,7 +120,7 @@ export class SnippetsViewProvider implements vscode.WebviewViewProvider {
               </head>
               <body>
                  Just click on the snippet to insert it in the editor:<br />
-
+                  ${searchInputHtml}
                  ${controlsHTMLList}
 
                   <script nonce="${nonce}" src="${scriptUri}"></script>

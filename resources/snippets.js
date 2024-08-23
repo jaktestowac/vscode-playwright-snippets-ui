@@ -24,4 +24,30 @@
       }, 1000);
     });
   }
+  const searchInput = document.getElementById("searchInput");
+  console.log("searchInput", searchInput);
+  searchInput?.addEventListener("keyup", () => {
+    // @ts-ignore
+    const searchText = searchInput.value;
+    const allItems = Array.from(document.querySelectorAll(".nav-list__link"));
+
+    const searchResults = allItems.filter((item) => {
+      return item.getAttribute("aria-label")?.toLowerCase().includes(searchText);
+    });
+
+    for (const result of searchResults) {
+      result.classList.add("search-result");
+      result.classList.remove("not-search-result");
+      result?.parentElement?.classList.remove("not-search-result");
+    }
+
+    const notSearchResults = allItems.filter((item) => {
+      return !item.getAttribute("aria-label")?.toLowerCase().includes(searchText);
+    });
+    for (const item of notSearchResults) {
+      item.classList.remove("search-result");
+      item.classList.add("not-search-result");
+      item?.parentElement?.classList.add("not-search-result");
+    }
+  });
 })();

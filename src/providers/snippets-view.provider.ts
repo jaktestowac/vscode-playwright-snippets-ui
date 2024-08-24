@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import { getNonce } from "../helpers/helpers";
 import { svgSnippetIcon } from "../helpers/icons";
-import { PwSnippetMap } from "../helpers/types";
+import { PwSnippetListMap, PwSnippetMap } from "../helpers/types";
 import { showErrorMessage, showInformationMessage } from "../helpers/window-messages";
 
 export class SnippetsViewProvider implements vscode.WebviewViewProvider {
@@ -75,24 +75,38 @@ export class SnippetsViewProvider implements vscode.WebviewViewProvider {
     const styleVSCodeUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "vscode.css"));
     const styleMainUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "main.css"));
 
+    const tempList: PwSnippetListMap = {};
+    for (const snippet in this._snippetsList) {
+      const snippetObj = this._snippetsList[snippet];
+
+      const category = snippetObj.category ?? "Other";
+
+      if (!(category in tempList)) {
+        tempList[category] = [];
+      }
+      tempList[category].push(snippetObj);
+    }
+
     let controlsHTMLList = ``;
 
-    if (this._snippetsList !== undefined) {
-      controlsHTMLList += '<nav class="nav-list">';
-      for (const snippet in this._snippetsList) {
-        const script = this._snippetsList[snippet];
+    for (const [category, snippets] of Object.entries(tempList)) {
+      controlsHTMLList += `<h4 style="text-align: center !important;" aria-label="${category}" id="id-${category}" category="${category}" class="collapsible nav-list__title">${category}</h4>`;
+
+      controlsHTMLList += `<nav class="nav-list" category="${category}">`;
+      for (const snippet in snippets) {
+        const snippetObj = snippets[snippet];
         controlsHTMLList += `
           <div class="nav-list__item">
-            <a class="nav-list__link has-tooltip" aria-label="${script.prefix}: ${script.description}" key="${script.prefix}" tooltip-text="${script.prefix}: ${script.description}">
+            <a class="nav-list__link has-tooltip" aria-label="${snippetObj.prefix}: ${snippetObj.description}" key="${snippetObj.prefix}" tooltip-text="${snippetObj.prefix}: ${snippetObj.description}">
               <code-icon class="nav-list__icon" modifier="">
               </code-icon>
-              <tooltip class="nav-list__label" content="${script.prefix}" >
-                ${svgSnippetIcon}<span>${script.description}</span>
+              <tooltip class="nav-list__label" content="${snippetObj.prefix}" >
+                ${svgSnippetIcon}<span>${snippetObj.description}</span>
               </tooltip>
             </a>
           </div>`;
       }
-      controlsHTMLList += "</div>";
+      controlsHTMLList += "</nav>";
     }
 
     if (this._snippetsList === undefined) {

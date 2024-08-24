@@ -9,3 +9,7 @@ export interface PwSnippet {
 export interface PwSnippetMap {
   [key: string]: PwSnippet;
 }
+
+export interface PwSnippetListMap {
+  [key: string]: PwSnippet[];
+}

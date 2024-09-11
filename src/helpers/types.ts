@@ -4,6 +4,7 @@ export interface PwSnippet {
   description: string;
   prettyName?: string;
   category?: string;
+  tags?: string[];
 }
 
 export interface PwSnippetMap {

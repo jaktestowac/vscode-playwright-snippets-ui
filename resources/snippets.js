@@ -32,7 +32,7 @@
     const allItems = Array.from(document.querySelectorAll(".nav-list__link"));
 
     const searchResults = allItems.filter((item) => {
-      return item.getAttribute("aria-label")?.toLowerCase().includes(searchText);
+      return item.getAttribute("searchables")?.toLowerCase().includes(searchText);
     });
 
     for (const result of searchResults) {
@@ -42,7 +42,7 @@
     }
 
     const notSearchResults = allItems.filter((item) => {
-      return !item.getAttribute("aria-label")?.toLowerCase().includes(searchText);
+      return !item.getAttribute("searchables")?.toLowerCase().includes(searchText);
     });
     
     for (const item of notSearchResults) {

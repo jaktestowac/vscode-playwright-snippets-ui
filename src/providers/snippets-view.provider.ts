@@ -100,12 +100,14 @@ export class SnippetsViewProvider implements vscode.WebviewViewProvider {
         if (snippetObj.tags !== undefined) {
           tags = snippetObj.tags.join(", ");
 
-          tags = ` ${tags}`;
+          tags = ` -> tags: ${tags}`;
         }
 
         controlsHTMLList += `
           <div class="nav-list__item">
-            <a class="nav-list__link has-tooltip" aria-label="${snippetObj.prefix}: ${snippetObj.description}${tags}" key="${snippetObj.prefix}" tooltip-text="${snippetObj.prefix}: ${snippetObj.description}">
+            <a class="nav-list__link has-tooltip" searchables="${snippetObj.prefix}: ${snippetObj.description}${tags}"
+                aria-label="${snippetObj.prefix}: ${snippetObj.description}" key="${snippetObj.prefix}"
+                tooltip-text="${snippetObj.prefix}: ${snippetObj.description}">
               <code-icon class="nav-list__icon" modifier="">
               </code-icon>
               <tooltip class="nav-list__label" content="${snippetObj.prefix}" >

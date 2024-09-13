@@ -123,8 +123,8 @@ a.nav-list__link {
   align-items: center;
   display: flex;
   flex-direction: row;
-  gap: 0.2rem;
-  padding: 0.2rem 0rem;
+  gap: 0.1rem;
+  padding: 0.1rem 0rem;
   cursor: pointer;
 }
 
@@ -140,6 +140,16 @@ a.nav-list__link {
 }
 
 .nav-list__link {
+  align-items: center;
+  color: inherit;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  gap: 0rem;
+  user-select: none;
+}
+
+div.nav-list__item {
   align-items: center;
   color: inherit;
   display: flex;
@@ -217,4 +227,35 @@ a.nav-list__link {
   display: none;
   padding: 0px;
   margin: 0px;
+}
+
+.list__item_not_clickable {
+  cursor: default !important;
+}
+
+.paste-icon {
+  cursor: pointer;
+  opacity: 0.3;
+}
+
+.paste-icon:hover {
+  opacity: 1;
+}
+
+.loading {
+  pointer-events: none;
+  cursor: progress !important;
+  opacity: 0.6 !important;
+}
+
+.loading > svg {
+  pointer-events: none;
+  color: orange !important;
+  fill: currentColor !important;
+}
+
+.loading:hover {
+  pointer-events: none;
+  cursor: progress;
+  opacity: 0.6 !important;
 }

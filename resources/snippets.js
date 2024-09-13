@@ -6,7 +6,7 @@
   // @ts-ignore
   const vscode = acquireVsCodeApi();
 
-  const buttons = document.querySelectorAll(".nav-list__link");
+  const buttons = document.querySelectorAll(".paste-icon");
   for (const button of buttons) {
     button.addEventListener("click", () => {
       const attributeKey = button.getAttribute("key");
@@ -24,6 +24,26 @@
       }, 1000);
     });
   }
+
+  const commandLables = document.querySelectorAll(".nav-list__link");
+  for (const label of commandLables) {
+    label.addEventListener("dblclick", () => {
+      const attributeKey = label.getAttribute("key");
+      vscode.postMessage({ type: "invokeSnippet", key: attributeKey });
+
+      // Disable the button and show a loading indicator
+      // for a second to let the user know the command is running
+      // @ts-ignore
+      label.disabled = true;
+      label.classList.add("loading");
+      setTimeout(() => {
+        // @ts-ignore
+        label.disabled = false;
+        label.classList.remove("loading");
+      }, 1000);
+    });
+  }
+
   const searchInput = document.getElementById("searchInput");
 
   searchInput?.addEventListener("keyup", () => {
@@ -44,7 +64,7 @@
     const notSearchResults = allItems.filter((item) => {
       return !item.getAttribute("searchables")?.toLowerCase().includes(searchText);
     });
-    
+
     for (const item of notSearchResults) {
       item.classList.remove("search-result");
       item.classList.add("not-search-result");

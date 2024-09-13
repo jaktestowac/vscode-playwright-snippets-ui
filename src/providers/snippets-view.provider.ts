@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { getNonce } from "../helpers/helpers";
-import { svgSnippetIcon } from "../helpers/icons";
+import { svgAddSnippetIcon, svgAddSnippetIconSimple, svgSnippetIcon } from "../helpers/icons";
 import { PwSnippetListMap, PwSnippetMap } from "../helpers/types";
 import { showErrorMessage, showInformationMessage } from "../helpers/window-messages";
 
@@ -103,17 +103,24 @@ export class SnippetsViewProvider implements vscode.WebviewViewProvider {
           tags = ` -> tags: ${tags}`;
         }
 
+        let playButtons = "";
+        playButtons += `<span class="paste-icon" tooltip-text="Paste" key="${snippetObj.prefix}">${svgAddSnippetIconSimple}</span>`;
+
         controlsHTMLList += `
           <div class="nav-list__item">
-            <a class="nav-list__link has-tooltip" searchables="${snippetObj.prefix}: ${snippetObj.description}${tags}"
+            <div class="nav-list__item has-tooltip list__item_not_clickable" searchables="${snippetObj.prefix}: ${snippetObj.description}${tags}"
                 aria-label="${snippetObj.prefix}: ${snippetObj.description}" key="${snippetObj.prefix}"
                 tooltip-text="${snippetObj.prefix}: ${snippetObj.description}">
-              <code-icon class="nav-list__icon" modifier="">
-              </code-icon>
-              <tooltip class="nav-list__label" content="${snippetObj.prefix}" >
-                ${svgSnippetIcon}<span>${snippetObj.description}</span>
-              </tooltip>
-            </a>
+              <div class="nav-list__link list__item_not_clickable" searchables="${snippetObj.prefix}: ${snippetObj.description}${tags}"
+                  aria-label="${snippetObj.prefix}: ${snippetObj.description}" key="${snippetObj.prefix}"
+                  tooltip-text="${snippetObj.prefix}: ${snippetObj.description}">
+                <code-icon class="nav-list__icon" modifier="">
+                </code-icon>
+                <tooltip class="nav-list__label" content="${snippetObj.prefix}" >
+                  <span>${snippetObj.description}</span>
+                </tooltip>
+              </div>${playButtons}
+            </div>
           </div>`;
       }
       controlsHTMLList += "</nav>";

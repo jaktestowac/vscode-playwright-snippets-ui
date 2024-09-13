@@ -104,7 +104,7 @@ export class SnippetsViewProvider implements vscode.WebviewViewProvider {
         }
 
         let playButtons = "";
-        playButtons += `<span class="paste-icon" tooltip-text="Paste" key="${snippetObj.prefix}">${svgAddSnippetIconSimple}</span>`;
+        playButtons += `<span class="paste-icon" tooltip-text="Paste" key="${snippetObj.prefix}">${svgAddSnippetIcon}</span>`;
 
         controlsHTMLList += `
           <div class="nav-list__item">
@@ -138,7 +138,7 @@ export class SnippetsViewProvider implements vscode.WebviewViewProvider {
     const nonce = getNonce();
 
     return `<!DOCTYPE html>
-              <html lang="en">
+      <html lang="en">
               <head>
                   <meta charset="UTF-8">
                   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';">
@@ -156,6 +156,6 @@ export class SnippetsViewProvider implements vscode.WebviewViewProvider {
 
                   <script nonce="${nonce}" src="${scriptUri}"></script>
               </body>
-              </html>`;
+    </html>`;
   }
 }

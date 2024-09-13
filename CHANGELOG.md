@@ -2,7 +2,7 @@
 
 All notable changes to the "playwright-snippets-ui" extension will be documented in this file.
 
-## [0.0.6] - 2024-08-XX
+## [0.0.6] - 2024-08-13
 
 - changed: styling
 - changed: button behavior (click on icon or double click on snippet to paste it)

@@ -4,7 +4,7 @@
   "description": "UI for Playwright Snippets VS Code",
   "author": "jaktestowac.pl",
   "publisher": "jaktestowac-pl",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "icon": "media/playwright-snippets-ui-logo.png",
   "engines": {
     "vscode": "^1.60.0"

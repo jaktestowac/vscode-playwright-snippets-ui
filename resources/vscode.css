@@ -224,7 +224,7 @@ div.nav-list__item {
 }
 
 .not-search-result {
-  display: none;
+  display: none !important;
   padding: 0px;
   margin: 0px;
 }

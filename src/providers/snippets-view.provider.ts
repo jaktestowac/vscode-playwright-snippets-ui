@@ -107,11 +107,11 @@ export class SnippetsViewProvider implements vscode.WebviewViewProvider {
         playButtons += `<span class="paste-icon" tooltip-text="Paste" key="${snippetObj.prefix}">${svgAddSnippetIcon}</span>`;
 
         controlsHTMLList += `
-          <div class="nav-list__item">
-            <div class="nav-list__item has-tooltip list__item_not_clickable" searchables="${snippetObj.prefix}: ${snippetObj.description}${tags}"
+          <div class="nav-list__item searchables" searchables="${snippetObj.prefix}: ${snippetObj.description}${tags}">
+            <div class="nav-list__item has-tooltip list__item_not_clickable" 
                 aria-label="${snippetObj.prefix}: ${snippetObj.description}" key="${snippetObj.prefix}"
                 tooltip-text="${snippetObj.prefix}: ${snippetObj.description}">
-              <div class="nav-list__link list__item_not_clickable" searchables="${snippetObj.prefix}: ${snippetObj.description}${tags}"
+              <div class="nav-list__link list__item_not_clickable" 
                   aria-label="${snippetObj.prefix}: ${snippetObj.description}" key="${snippetObj.prefix}"
                   tooltip-text="${snippetObj.prefix}: ${snippetObj.description}">
                 <code-icon class="nav-list__icon" modifier="">
@@ -151,7 +151,9 @@ export class SnippetsViewProvider implements vscode.WebviewViewProvider {
               </head>
               <body>
                  Just click on the snippet to insert it in the editor:<br />
+                 
                   ${searchInputHtml}
+                  <span id="msg_placeholder"></span>
                  ${controlsHTMLList}
 
                   <script nonce="${nonce}" src="${scriptUri}"></script>

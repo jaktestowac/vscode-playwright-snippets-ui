@@ -2,6 +2,10 @@
 
 All notable changes to the "playwright-snippets-ui" extension will be documented in this file.
 
+## [0.0.9] - 2024-09-22
+
+- fix: category sorting
+
 ## [0.0.8] - 2024-09-20
 
 - fix: changelog

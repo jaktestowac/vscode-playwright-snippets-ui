@@ -75,26 +75,33 @@ export class SnippetsViewProvider implements vscode.WebviewViewProvider {
     const styleVSCodeUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "vscode.css"));
     const styleMainUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, "resources", "main.css"));
 
-    const tempList: PwSnippetListMap = {};
+    const snippetsPerCategory: PwSnippetListMap = {};
+    let categoriesSorted = [];
     for (const snippet in this._snippetsList) {
       const snippetObj = this._snippetsList[snippet];
 
       const category = snippetObj.category ?? "Other";
 
-      if (!(category in tempList)) {
-        tempList[category] = [];
+      if (!(category in snippetsPerCategory)) {
+        snippetsPerCategory[category] = [];
       }
-      tempList[category].push(snippetObj);
+      snippetsPerCategory[category].push(snippetObj);
+      categoriesSorted.push(category);
     }
 
-    let controlsHTMLList = ``;
+    categoriesSorted = [...new Set(categoriesSorted)];
 
-    for (const [category, snippets] of Object.entries(tempList)) {
-      controlsHTMLList += `<h4 style="text-align: center !important;" aria-label="${category}" id="id-${category}" category="${category}" class="collapsible nav-list__title">${category}</h4>`;
+    let controlsHTMLList = ``;
+    categoriesSorted = categoriesSorted.sort();
+
+    for (const category of categoriesSorted) {
+      const snippetsInCategory = snippetsPerCategory[category];
+
+      controlsHTMLList += `<h4 style="text-align: center !important;" aria-label="${category}" id="id-${category}" category="${category}" class="collapsible nav-list__title">> ${category}</h4>`;
 
       controlsHTMLList += `<nav class="nav-list" category="${category}">`;
-      for (const snippet in snippets) {
-        const snippetObj = snippets[snippet];
+      for (const snippet in snippetsInCategory) {
+        const snippetObj = snippetsInCategory[snippet];
 
         let tags = "";
         if (snippetObj.tags !== undefined) {
@@ -149,7 +156,7 @@ export class SnippetsViewProvider implements vscode.WebviewViewProvider {
                   <link href="${styleMainUri}" rel="stylesheet">
   
               </head>
-              <body>
+              <body data-vscode-context='{"preventDefaultContextMenuItems": true}'>
                  Just click on the snippet to insert it in the editor:<br />
                  
                   ${searchInputHtml}

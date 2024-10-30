@@ -2,6 +2,10 @@
 
 All notable changes to the "playwright-snippets-ui" extension will be documented in this file.
 
+## [1.0.1] - 2024-10-30
+
+- feat: copy snippet to clipboard
+
 ## [1.0.0] - 2024-09-22
 
 - stable release

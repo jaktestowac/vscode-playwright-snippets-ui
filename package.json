@@ -56,8 +56,21 @@
       {
         "command": "playwright-snippets-ui.insertSnippet",
         "title": "Insert Snippet"
+      },
+      {
+        "command": "playwright-snippets-ui.copySelectedSnippet",
+        "category": "Playwright Snippets UI",
+        "title": "Copy Selected Snippet"
       }
-    ]
+    ],
+    "menus": {
+      "webview/context": [
+        {
+          "command": "playwright-snippets-ui.copySelectedSnippet",
+          "when": "webviewId == playwright-snippets-ui.snippets"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

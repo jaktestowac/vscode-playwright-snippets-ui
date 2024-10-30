@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
-import { getNonce } from "../helpers/helpers";
+import { formatSnippet, getNonce } from "../helpers/helpers";
 import { svgAddSnippetIcon, svgAddSnippetIconSimple, svgSnippetIcon } from "../helpers/icons";
-import { PwSnippetListMap, PwSnippetMap } from "../helpers/types";
+import { PwSnippet, PwSnippetListMap, PwSnippetMap } from "../helpers/types";
 import { showErrorMessage, showInformationMessage } from "../helpers/window-messages";
 
 export class SnippetsViewProvider implements vscode.WebviewViewProvider {
@@ -63,6 +63,18 @@ export class SnippetsViewProvider implements vscode.WebviewViewProvider {
     );
   }
 
+  public copySnippet(snippetName: string) {
+    console.log("copySnippet", snippetName);
+    const snippet = Object.values(this._snippetsList).find((snippet) => snippet.prefix === snippetName);
+    console.log("copySnippet", snippet);
+    if (snippet === undefined) {
+      return vscode.env.clipboard.writeText("");
+    }
+    const formattedSnippet = formatSnippet(snippet);
+
+    vscode.env.clipboard.writeText(formattedSnippet);
+  }
+
   public refresh(scripts: PwSnippetMap) {
     this._snippetsList = scripts;
     if (this._view !== undefined) {
@@ -116,6 +128,7 @@ export class SnippetsViewProvider implements vscode.WebviewViewProvider {
         controlsHTMLList += `
           <div class="nav-list__item searchables" searchables="${snippetObj.prefix}: ${snippetObj.description}${tags}">
             <div class="nav-list__item has-tooltip list__item_not_clickable" 
+                  data-vscode-context='{"key": "${snippetObj.prefix}"}'
                 aria-label="${snippetObj.prefix}: ${snippetObj.description}" key="${snippetObj.prefix}"
                 tooltip-text="${snippetObj.prefix}: ${snippetObj.description}">
               <div class="nav-list__link list__item_not_clickable" 
